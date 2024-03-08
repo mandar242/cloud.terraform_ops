@@ -10,7 +10,7 @@
         state: directory
       register: tfdir
 
-    - name: Run terraform configuration
+    - name: Stash the Terraform plan file
       vars:
         terraform_plan_file: "{{ tfdir.path }}/original_plan.tfplan"
       block:
@@ -34,14 +34,8 @@
             module_plan_stash_load_plan_file_path: "{{ tfdir.path }}/loaded_plan.tfplan"
             module_plan_stash_tf_project_path: "{{ tfdir.path }}"
 
-        - name: Load the Terraform plan file
-          cloud.terraform.plan_stash:
-            path: "{{ terraform_plan_file }}"
-            per_host: false
-            state: load
-
-      always:
-        - name: Delete temporary directory
-          ansible.builtin.file:
-            state: absent
-            path: "{{ tfdir.path }}"
+      # always:
+      #   - name: Delete temporary directory
+      #     ansible.builtin.file:
+      #       state: absent
+      #       path: "{{ tfdir.path }}"
