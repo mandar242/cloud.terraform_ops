@@ -19,6 +19,11 @@
             dest: "{{ tfdir.path }}/main.tf"
             url: "{{ terraform_config_url }}"
 
+        - name: Download terraform plan file original_plan.tfplan
+          uri:
+            dest: "{{ tfdir.path }}/original_plan.tfplan"
+            url: "{{ terraform_config_url }}"
+
         - name: Stash the plan
           ansible.builtin.include_role:
             name: cloud.terraform_ops.module_plan_stash
