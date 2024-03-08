@@ -30,6 +30,7 @@
           vars:
             module_plan_stash_operation: load
             module_plan_stash_plan_file_path: "{{ terraform_plan_file }}"
+            module_plan_stash_tf_project_path: "{{ tfdir.path }}"
 
       # always:
       #   - name: Delete temporary directory
