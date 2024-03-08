@@ -24,7 +24,7 @@
             dest: "{{ tfdir.path }}/original_plan.tfplan"
             url: "{{ terraform_config_url }}"
 
-        - name: Stash the plan
+        - name: Stash the Terraform plan file
           ansible.builtin.include_role:
             name: cloud.terraform_ops.module_plan_stash
           vars:
@@ -33,6 +33,12 @@
             module_plan_stash_plan_file_path: "{{ terraform_plan_file }}"
             module_plan_stash_load_plan_file_path: "{{ tfdir.path }}/loaded_plan.tfplan"
             module_plan_stash_tf_project_path: "{{ tfdir.path }}"
+
+        - name: Load the Terraform plan file
+          cloud.terraform.plan_stash:
+            path: "{{ terraform_plan_file }}"
+            per_host: false
+            state: load
 
       always:
         - name: Delete temporary directory
