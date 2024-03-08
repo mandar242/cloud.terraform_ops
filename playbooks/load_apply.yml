@@ -10,11 +10,6 @@
         state: directory
       register: tfdir
 
-    - name: Install the latest version terraform
-      ansible.builtin.dnf:
-        name: terraform
-        state: latest
-
     - name: Load the Terraform plan file
       vars:
         terraform_plan_file: "{{ tfdir.path }}/loaded_plan.tfplan"
