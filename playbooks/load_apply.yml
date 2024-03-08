@@ -4,11 +4,11 @@
   gather_facts: true
   tasks:
 
-    # - name: Create temporary directory to run terraform configuration
-    #   ansible.builtin.tempfile:
-    #     suffix: '.tf'
-    #     state: directory
-    #   register: tfdir
+    - name: Create temporary directory to run terraform configuration
+      ansible.builtin.tempfile:
+        suffix: '.tf'
+        state: directory
+      register: tfdir
 
     - name: Load the Terraform plan file
       vars:
