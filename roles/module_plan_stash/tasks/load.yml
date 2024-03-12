@@ -1,10 +1,4 @@
 ---
-- name: Decode stash plan and create a plan file
-  copy:
-    dest: "{{ module_plan_stash_plan_file_path }}"
-    content: "{{ terraform_plan | b64decode }}"
-  ignore_errors: true
-
 - name: Load the terraform plan file from variable "{{ module_plan_stash_var_name | default('terraform_plan') }}" into file "{{ module_plan_stash_plan_file_path }}"
   cloud.terraform.plan_stash:
     path: "{{ module_plan_stash_plan_file_path }}"
