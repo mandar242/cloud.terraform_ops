@@ -9,9 +9,11 @@
   # no_log: true
 
 - debug: msg="removed force_init from load.yml"
+- debug: msg="added init_reconfigure to load.yml"
 - name: Apply terraform plan
   cloud.terraform.terraform:
     project_path: "{{ module_plan_stash_tf_project_path}}"
     plan_file: "{{ module_plan_stash_plan_file_path }}"
     # force_init: true
+    init_reconfigure: true
     state: present
