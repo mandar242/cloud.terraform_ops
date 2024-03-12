@@ -6,7 +6,7 @@
 
     - name: Create temporary directory to run terraform configuration
       ansible.builtin.tempfile:
-        suffix: '.tf'
+        # suffix: '.tf'
         state: directory
       register: tfdir
 
