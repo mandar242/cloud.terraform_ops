@@ -4,6 +4,11 @@
   gather_facts: true
   tasks:
 
+    - name: check if tempdir from earlier playbook in workflow exists
+      debug:
+        msg: "{{ tfdir.path }}"
+      ignore_errors: true
+
     - name: Create temporary directory to run terraform configuration
       ansible.builtin.tempfile:
         state: directory

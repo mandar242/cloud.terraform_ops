@@ -1,14 +1,12 @@
 ---
 - name: Generate Terraform plan file from configuration
   cloud.terraform.terraform:
-    force_init: true
+    # force_init: true #this should be turned off unless you intend to provision an entirely new Terraform deployment.
     plan_file: "{{ module_plan_stash_plan_file_path }}"
     project_path: "{{ module_plan_stash_tf_project_path }}"
     state: present
   check_mode: true
   when: module_plan_stash_generate_plan_file == True
-
-- debug: msg="test"
 
 - name: Stash the Terraform plan file into variable "{{ module_plan_stash_var_name | default('terraform_plan') }}"
   cloud.terraform.plan_stash:
