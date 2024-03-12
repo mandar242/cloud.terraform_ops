@@ -12,26 +12,25 @@
 
     - name: Stash the Terraform plan file
       vars:
-        terraform_plan_file: "{{ tfdir.path }}/original_plan.tfplan"
+        terraform_plan_file: "{{ tfdir.path }}/generated_plan.tfplan"
       block:
         - name: Download terraform configuration
           uri:
             dest: "{{ tfdir.path }}/main.tf"
             url: "{{ terraform_config_url }}"
 
-        - name: Download terraform plan file original_plan.tfplan
-          uri:
-            dest: "{{ tfdir.path }}/original_plan.tfplan"
-            url: "{{ terraform_config_url }}"
+        # - name: Download terraform plan file original_plan.tfplan
+        #   uri:
+        #     dest: "{{ tfdir.path }}/original_plan.tfplan"
+        #     url: "{{ terraform_config_url }}"
 
         - name: Stash the Terraform plan file
           ansible.builtin.include_role:
             name: cloud.terraform_ops.module_plan_stash
           vars:
             module_plan_stash_operation: stash
-            module_plan_stash_generate_plan_file: false
+            module_plan_stash_generate_plan_file: true
             module_plan_stash_plan_file_path: "{{ terraform_plan_file }}"
-            module_plan_stash_load_plan_file_path: "{{ tfdir.path }}/loaded_plan.tfplan"
             module_plan_stash_tf_project_path: "{{ tfdir.path }}"
 
       always:
