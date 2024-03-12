@@ -34,7 +34,16 @@
             module_plan_stash_tf_project_path: "{{ tfdir.path }}"
 
       always:
-        - name: Delete temporary directory
-          ansible.builtin.file:
-            state: absent
-            path: "{{ tfdir.path }}"
+
+        - name: List all files in tempdir
+          command: "ls {{ tfdir.path }}"
+          register: dir_out
+
+        - name: List all files in tempdir
+          debug:
+            var: dir_out.stdout_lines
+
+        # - name: Delete temporary directory
+        #   ansible.builtin.file:
+        #     state: absent
+        #     path: "{{ tfdir.path }}"
