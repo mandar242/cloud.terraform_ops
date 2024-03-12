@@ -10,7 +10,7 @@
 
 - debug: msg="test"
 
-- name: Encode a terraform plan file into variable "{{ module_plan_stash_var_name | default('terraform_plan') }}"
+- name: Stash the Terraform plan file into variable "{{ module_plan_stash_var_name | default('terraform_plan') }}"
   cloud.terraform.plan_stash:
     path: "{{ module_plan_stash_plan_file_path }}"
     state: stash
